@@ -1,0 +1,47 @@
+.gee-clear-dialog {
+//max-width: 100%;
+//min-width: 320px;
+//width: 320px;
+  &>* {
+    max-width: 100%;
+  }
+  .el-dialog__body {
+    padding: 10px 20px;
+    max-height: 65vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    .el-radio-group {
+      width: 100%;
+      height: auto;
+      max-height: 245px;
+      margin-top: 5px;
+      padding: 10px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      border: 1px solid #dcdfe6;
+      border-radius: 4px;
+      .el-radio {
+        display: block;
+        height: 26px;
+        margin: 0px;
+        padding: 0px;
+        line-height: 26px;
+      }
+    }
+  }
+//.el-button {
+//  color: #fff !important;
+//  background-color: #4b9e65 !important;
+//  border-color: #4b9e65 !important;
+//  &:active {
+//    opacity: 0.6;
+//  }
+//}
+}
+@media screen and (max-width: 640px) {
+  .gee-clear-dialog {
+    max-width: 100%;
+    min-width: 320px;
+    width: 320px;
+  }
+}

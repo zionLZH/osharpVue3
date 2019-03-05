@@ -1,0 +1,64 @@
+.com-tree-box {
+  height: 100%;
+  * {
+    user-select: none;
+  }
+  .scroll {
+    overflow: scroll;
+  }
+  .left {
+    &:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    float: left;
+    width: 65%;
+    height: 100%;
+    .tree {
+      width: 100%;
+      min-width: 1024px;
+      .tree-node {
+        width: 100%;
+        * {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+  .bar {
+    float: left;
+    width: 8px;
+    height: 100%;
+    background-color: #eee;
+    cursor: col-resize;
+  }
+  .right {
+    &:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    float: left;
+    width: calc(35% - 8px);
+    height: 100%;
+    .tree {
+      width: 100%;
+      min-width: 800px;
+      .tree-node {
+        width: 100%;
+        * {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+  .fnBar {
+    width: 100%;
+    padding: 10px;
+  }
+}

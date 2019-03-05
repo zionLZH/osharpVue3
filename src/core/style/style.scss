@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+.pointIt {
+  cursor: pointer !important;
+}
+/* rewrite */
+.el-pagination {
+  max-width: 100%;
+  margin: 10px 0px;
+  text-align: center !important;
+}
+.el-message-box {
+    max-width: 100%;
+}
+/* mobile */
+@media only screen and (min-width: 100px) and (max-width: 640px) {
+	.el-dialog {
+	  width: 100% !important;
+	  max-width: 100% !important;
+	}
+	.el-pagination {
+	  padding: 0px !important;
+	  .el-pagination__total {
+	    margin: 0px !important;
+	    display: block !important;
+	  }
+	  .el-pagination__sizes {
+	    display: none !important;
+	  }
+	  .el-pagination__jump {
+	    margin: 0px !important;
+	    display: block !important;
+	  }
+	}
+}
+/* iPhone 5 */
+@media only screen and (min-width: 100px) and (max-width: 320px) {
+    .el-pagination {
+      button[type="button"] {
+          display: block;
+          margin: 5px auto;
+          padding: 0px;
+      }
+    }
+}
