@@ -260,6 +260,8 @@ export default {
     }
   },
   beforeDestroy () {
+    this.tableCopy = []
+    this.initTableData = []
     // this.$refs.table.bodyWrapper.removeEventListener('scroll', this.scrollHandler)
   },
   updated () {

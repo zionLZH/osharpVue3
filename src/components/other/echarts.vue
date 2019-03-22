@@ -45,6 +45,13 @@ export default {
     },
     getId () {
       return this.id
+    },
+    resize () {
+      try {
+        VM.echart.resize()
+      } catch (e) {
+        // nothing
+      }
     }
   },
   computed: {
@@ -56,13 +63,13 @@ export default {
     this.echart = echarts.init(document.getElementById(this.id), theme)
     this.echart.setOption(this.option)
     const VM = this
-    window.addEventListener('resize', () => {
-      try {
-        VM.echart.resize()
-      } catch (e) {
-        // nothing
-      }
-    })
+    window.addEventListener('resize', this.resize)
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.resize)
+    this.echart.clear()
+    this.echart.destroy()
+    this.echart = {}
   }
 }
 </script>
