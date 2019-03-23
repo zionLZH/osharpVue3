@@ -26,6 +26,9 @@ import '@/assets/font-class/iconfont.css'
 // Extras
 import qriously from 'vue-qriously'
 import * as system from '@/utils/system'
+import * as vExtend from './utils/vextend'
+
+Vue.prototype.routerPath = vExtend.routerPath
 
 directiveInit(Vue)
 router.beforeEach(routerHook)
