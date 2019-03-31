@@ -42,7 +42,7 @@ export function routerPath (filterMap, sync) {
     if (val === undefined) { continue }
     (val.constructor === Object && val['value'] !== undefined) && (val = filterMap[key].value)
     if (sync) {
-      (val.constructor === Object && val['value'] !== undefined) ? (filterMap[key].value = typeReformat(query[key])) : (filterMap[key] = typeReformat(query[key]))
+      (filterMap[key].constructor === Object && filterMap[key]['value'] !== undefined) ? (filterMap[key].value = typeReformat(query[key])) : (filterMap[key] = typeReformat(query[key]))
     } else {
       query[key] = typeReformat(val)
     }
