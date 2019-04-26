@@ -5,8 +5,9 @@ function typeReformat (val) {
   }
   let types = ['~', '$', '^', '!']
   if (typeof val === 'string' && types.indexOf(val.substr(0, 1)) !== -1) {
+    let option = val.substr(0, 1)
     val = val.substr(1, val.length)
-    switch (val.substr(0, 1)) {
+    switch (option) {
       case '~':
         return '' + val
       case '$':
@@ -14,7 +15,7 @@ function typeReformat (val) {
       case '^':
         return val === 'true'
       case '!':
-        return val * 1
+        return parseInt(val)
       default:
         return val
     }

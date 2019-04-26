@@ -83,6 +83,7 @@ export default {
             throw err
           }
           system.dataSet('modules', res, true)
+          window.vModuleArr = res
           this.loading = false
           this.$message({
             type: 'success',
