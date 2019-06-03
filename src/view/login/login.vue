@@ -76,6 +76,7 @@ export default {
             throw err
           }
           system.dataSet('auth', res.Data, true)
+          system.dataSet('userData', res.Data, true)
           res = await apiSecurity.getauthinfo()
           res = res.data
           if (res.constructor !== Array) {
