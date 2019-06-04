@@ -2,7 +2,7 @@
   <div ref="navMenuCountainer" v-if="reload">
     <el-menu
       class="nav-menu-countainer"
-      :class="{'pageMini': sys.pageMini, 'show': showMenu, 'hasSuffixId': ifHasSuffixId(), 'noSuffixId': !ifHasSuffixId()}"
+      :class="{'pageMini': sys.pageMini, 'show': showMenu}"
       :mode="sys.pageMini?'vertical':'horizontal'"
       :unique-opened="true"
       :text-color="themeConf[theme].color"
@@ -14,8 +14,7 @@
         v-for="(item,index) in routes"
         :key="index"
         :index="indexCalc(item)"
-        v-show="subPermissionCheck(item)"
-        v-if="!item.meta || !item.meta.hidden"
+        v-if="!item.h"
         :is="item.children.length == 1? 'el-menu-item':'el-submenu'"
         >
         <template v-if="item.children.length == 1">{{item.children[0].meta.title}}</template>
@@ -23,17 +22,16 @@
           <template slot="title">{{item.meta.title}}</template>
           <!--<el-menu-item v-for="(subItem, jndex) in item.children" v-if="!subItem.meta || !subItem.meta.hidden" :key="jndex" :index="item.path + '/' + subItem.path">{{subItem.meta.title}}</el-menu-item>-->
           <div
-            v-for="(item,index) in item.children"
+            v-for="(citem,index) in item.children"
             :key="index"
-            :index="indexCalc(item)"
-            v-show="subPermissionCheck(item)"
-            v-if="!item.meta || !item.meta.hidden"
-            :is="!item.children || item.children.length == 1? 'el-menu-item':'el-submenu'"
+            :index="indexCalc(citem)"
+            v-if="!citem.h"
+            :is="!citem.children || citem.children.length == 1? 'el-menu-item':'el-submenu'"
           >
-            <template v-if="!item.children">{{item.meta.title}}</template>
+            <template v-if="!citem.children">{{citem.meta.title}}</template>
             <template v-else>
-              <template slot="title">{{item.meta.title}}</template>
-              <el-menu-item v-for="(subItem, jndex) in item.children" v-show="permissionCheck(subItem)" v-if="!subItem.meta || !subItem.meta.hidden" :key="jndex" :index="indexCalc(subItem)">{{subItem.meta.title}}</el-menu-item>
+              <template slot="title">{{citem.meta.title}}</template>
+              <el-menu-item v-for="(subItem, jndex) in citem.children" v-if="!subItem.h" :key="jndex" :index="indexCalc(subItem)">{{subItem.meta.title}}</el-menu-item>
             </template>
           </div>
         </template>
@@ -114,11 +112,48 @@ export default {
         return item.path
       }
     },
-    ifHasSuffixId () {
-      if (this.$route.query._suffixId) {
+    // 这里主要只靠这个地方来做判断。确定是否显隐菜单
+    menuHiddenCheck (item) {
+      if (item.meta) {
+        // do something check
+      }
+      if (!item.meta || (item.meta && !item.meta.module && !item.meta.hidden)) {
+        return false
+      }
+      if (this.permission.indexOf(item.meta.module) === -1 || item.meta.hidden) {
         return true
       }
       return false
+    },
+    routerCalcer () {
+      let _self = this
+      function ItemCalc (item) {
+        if (item.constructor !== Array) {
+          item = [item]
+        }
+        let ret = { h: true, d: true }
+        for (let i = 0; i < item.length; i++) {
+          if (item[i].children) {
+            let subRet = ItemCalc(item[i].children)
+            item[i].h = subRet.h
+            item[i].d = subRet.d
+            if (!subRet.h) {
+              ret.h = subRet.h
+              ret.d = subRet.d
+            }
+          } else {
+            item[i].h = _self.menuHiddenCheck(item[i])
+            if (!item[i].h) {
+              ret.h = item[i].h
+              ret.d = item[i].d
+            }
+          }
+        }
+        return ret
+      }
+      ItemCalc(this.routes)
+      this.routes = JSON.parse(JSON.stringify(this.routes))
+      this.routes = this.routes
     }
   },
   watch: {
@@ -135,6 +170,7 @@ export default {
     '$route': {
       handler () {
         this.menuIndex = this.$route.name
+        this.routerCalcer()
       },
       deep: true
     },
@@ -150,23 +186,13 @@ export default {
     }
   },
   mounted () {
+    let _self = this
     this.menuIndex = this.$route.name
     bridge.$on('triggerMenu', () => {
       this.showMenu = !this.showMenu
     })
-    // for (let i = 0; i < this.routes.length; i++) {
-    //   if (this.routes[i].meta && this.routes[i].meta.module && !this.routes[i].children[i].meta.hidden) {
-    //     this.routes[i].meta.hidden = !this.subPermissionCheck(this.routes[i])
-    //   }
-    //   if (this.routes[i].children && this.routes[i].children.length > 0) {
-    //     for (let k = 0; k < this.routes[i].children.length; k++) {
-    //       if (this.routes[i].children[k].meta && this.routes[i].children[k].meta.module && !this.routes[i].children[k].meta.hidden) {
-    //         this.routes[i].children[k].meta.hidden = !this.permissionCheck(this.routes[i].children[k])
-    //       }
-    //     }
-    //   }
-    // }
-    this.routes = this.routes
+    // subFn ======
+    this.routerCalcer()
   }
 }
 </script>
