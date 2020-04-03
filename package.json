@@ -10,7 +10,7 @@
   "dependencies": {
     "vue": "^2.5.22",
     "vue-router": "^3.0.1",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "element-ui": "^2.4.6",
