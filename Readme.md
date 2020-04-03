@@ -1,3 +1,5 @@
+### 适配最新版OSharp请前往https://github.com/zionLZH/slowf-osharp-admin。 当前版本仅限2020年2月份之前的适配
+
 ### 1.如何使用
 #### 1.1 安装依赖
 ````
