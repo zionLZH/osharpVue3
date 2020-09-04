@@ -20,7 +20,7 @@
     "graphdracula": "^1.2.1",
     "js-cookie": "^2.2.0",
     "raphael": "^2.2.7",
-    "showdown": "^1.8.6",
+    "showdown": "^1.9.1",
     "tinymce": "^4.8.2",
     "vue-baidu-map": "^0.21.11",
     "vue-qriously": "^1.1.1",
