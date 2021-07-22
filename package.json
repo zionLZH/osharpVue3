@@ -24,7 +24,7 @@
     "tinymce": "^4.8.2",
     "vue-baidu-map": "^0.21.11",
     "vue-qriously": "^1.1.1",
-    "xlsx": "^0.14.1"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
