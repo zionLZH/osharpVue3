@@ -21,7 +21,7 @@
     "js-cookie": "^2.2.0",
     "raphael": "^2.2.7",
     "showdown": "^1.8.6",
-    "tinymce": "^4.8.2",
+    "tinymce": "^5.10.0",
     "vue-baidu-map": "^0.21.11",
     "vue-qriously": "^1.1.1",
     "xlsx": "^0.14.1"
