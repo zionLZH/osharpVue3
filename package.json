@@ -14,7 +14,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "element-ui": "^2.4.6",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "file-saver": "^2.0.0",
     "font-awesome": "^4.7.0",
     "graphdracula": "^1.2.1",
